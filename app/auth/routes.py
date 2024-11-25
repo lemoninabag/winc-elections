@@ -282,7 +282,7 @@ def send_email(recipient_email, confirmation_code):
     msg["To"] = recipient_email
 
     try:
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+        with smtplib.SMTP("mail.boltonac.ae", 587) as server:
             server.starttls()
             server.login(sender_address, password)
             server.sendmail(sender_address, recipient_email, msg.as_string())
