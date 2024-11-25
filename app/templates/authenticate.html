@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static', filename='auth.css')}}">
+    <link rel="icon" href="{{url_for('static', filename='favicon.png')}}" type="image/png">
+    <title>Authenticate - WINC Student Council Elections 2024</title>
+</head>
+
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+
+    <h2 class="auth-title">Authenticate Your Account</h2>
+
+    <p class="auth-message" style = "color: white; padding-left: 20px; padding-right: 20px;">An authentication code has been sent to your email. Please check your spam folder if you don't see it.</p>
+    <form class="auth-form" method="POST" action="{{ url_for('auth.authenticate') }}">
+        <br>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li><div style="color: red; font-size: 20px;">{{ message }}</div></li>
+            <br><br><br>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <input type="text" id="confirmation_code" name="confirmation_code" placeholder="Confirm your Code"
+            required><br><br>
+
+        <button type="submit">Verify</button>
+
+        
+    </form>
+
+    <a href="{{url_for('auth.resend_code')}}">Resend Code</a>
+    {% endblock %}
+</body>
+
+</html>

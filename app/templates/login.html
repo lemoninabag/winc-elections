@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}?v={{ timestamp }}">
+    <link rel="icon" href="{{url_for('static', filename='favicon.png')}}" type="image/png">
+    <title>Login - WINC Student Council Elections 2024</title>
+</head>
+
+<body>
+
+    <style>
+    .modal {
+        display: none; 
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5); /* Dim the background */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        border-radius: 8px;
+        width: 75%;
+        max-width: 1000px !important;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    </style>
+    {% extends "base.html" %}
+    {% block content %}
+
+    <a href="{{ url_for('main.index') }}" class="back-arrow">&#8592; Back to Home</a>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form method="POST" action="{{ url_for('register.register') }}">
+                <h1>Create Account</h1>
+                <span>to start voting</span>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+                <input type="text" id="username" name="username" required placeholder="Username" />
+                <input type="email" id="email" name="email" required placeholder="Email" />
+                <input type="password" id="password" name="password" required placeholder="Password (atleast 6 characters)" />
+                <br>
+                <div style="margin: 10px 0; display: flex; align-items: center; width: 100%">
+                    
+                    <label for="accept-terms" style="width: 100%; font-size: 14px; text-align: center;">
+                        By registering, you accept the <a href="javascript:void(0)" onclick="openTermsModal()">Terms and
+                            Conditions</a>
+                            
+                    </label>
+                    
+                </div>
+                <br>
+                <button type="submit" id="sign-up-button">Sign Up</button>
+                {% if error_message %}
+                <div style="color: red; font-size: 13px;">{{ error_message }}</div>
+                {% endif %}
+            </form>
+        </div>
+
+        <div class="form-container sign-in-container">
+            <form action="{{url_for('auth.login')}}" method="POST">
+                <h1>Sign in</h1>
+                <span>to your account</span>
+                <input type="text" id="username" name="username" required placeholder="Username" />
+                <input type="password" id="password" name="password" required placeholder="Password" />
+                <a href="{{ url_for('auth.forgot_password') }}">Forgot Password?</a>
+                <button type="submit">Sign In</button>
+                {% if error_message %}
+                <div style="color: red; font-size: 13px;">{{ error_message }}</div>
+                {% endif %}
+            </form>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>If you already have an account, please login to move on with voting</p>
+                    <button class="ghost" id="signIn" onClick="openSignIn()">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello!</h1>
+                    <p>Register with your username & email to verify your identity</p>
+                    <button class="ghost" id="signUp" onClick="openSignUp()">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms and Conditions Modal -->
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeTermsModal()">&times;</span><span class="close" onclick="closeTermsModal()" aria-label="Close modal">&times;</span>
+
+            <h2>Terms and Conditions</h2>
+            <p>
+                <strong>Eligibility</strong><br>
+                • Only enrolled students of the WINC are eligible to vote.<br>
+                • Voters must have a valid registered email address in the University's database.<br><br>
+
+                <strong>Voting Platform</strong><br>
+                • Voting will be conducted exclusively on the designated online platform provided by the University.<br>
+                • Access to the platform requires secure login credentials provided by the University.<br><br>
+
+                <strong>Voting Period</strong><br>
+                • Online voting will be open during the specified date and time announced by the University.<br><br>
+
+                <strong>Confidentiality and Security</strong><br>
+                • All votes are confidential and will not be linked to the voter’s identity.<br>
+                • Students are responsible for securing their login credentials and not to share with anyone.<br><br>
+
+                <strong>One Vote Per Student</strong><br>
+                • Each student is allowed to cast only one vote.<br><br>
+
+                <strong>Technical Issues</strong><br>
+                • The University is not responsible for technical difficulties arising from the voter’s device or
+                internet connection.<br>
+                • In case of issues with the voting platform, students should contact the designated support team at <strong>elections@boltonac.ae</strong>
+                immediately.<br><br>
+
+                <strong>Prohibited Activities</strong><br>
+                • Strict actions will be taken if any form of voter intimidation, vote-buying, or coercion is
+                noticed.<br>
+                • Unauthorized access or attempts to tamper with the voting platform will be subject to strict
+                disciplinary action.<br><br>
+
+                <strong>Results Declaration</strong><br>
+                • Results will be announced by the Election Committe and that would be final.<br><br>
+
+                <strong>Amendments</strong><br>
+                • The University reserves the right to amend terms and conditions at any time.
+
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+        const termsModal = document.getElementById('terms-modal');
+        const signUpButton = document.getElementById('sign-up-button');
+        const acceptTerms = document.getElementById('accept-terms');
+
+        function openSignIn() {
+            container.classList.remove("right-panel-active");
+        }
+
+        function openSignUp() {
+            container.classList.add("right-panel-active");
+        }
+
+        function toggleSignUpButton() {
+            signUpButton.disabled = !acceptTerms.checked;
+        }
+
+        function openTermsModal() {
+            termsModal.style.display = 'block';
+        }
+
+        function closeTermsModal() {
+            termsModal.style.display = 'none';
+        }
+
+        // Close modal if user clicks outside of it
+        window.onclick = function (event) {
+            if (event.target == termsModal) {
+                termsModal.style.display = 'none';
+            }
+        };
+    </script>
+    {% endblock %}
+</body>
+
+</html>

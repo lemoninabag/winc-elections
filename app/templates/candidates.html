@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidates - WINC Student Council Elections 2024</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='candidates.css')}}">
+    <link rel="icon" href="{{url_for('static', filename='favicon.png')}}" type="image/png">
+</head>
+
+<body>
+
+    <div class="candidates-container">
+        <div class="candidates-title">
+            <div><img src="{{url_for('static', filename='logo.png')}}" width='250px'></div>
+            <div>
+                <nav>
+                    <a href="{{url_for('main.index')}}">Home</a>
+                    <a href="{{url_for('vote.vote')}}">Voting</a>
+                    <a href="{{url_for('vote.results')}}">Results</a>
+                    <div id="indicator"></div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        {% for position, candidates in candidates.items() %}
+        <div class="position-section">
+            <h2 class="position-title">Nominees for {{ position }}</h2>
+            <div class="row">
+                {% for candidate in candidates %}
+                <div class="our-team">
+                    <div class="team-content">
+                        <h3 class="name">{{ candidate['nominee'] }}</h3>
+                        <p class="title">{{ candidate['program'] }} <br> {{ candidate['year'] }}</p>
+                    </div>
+                    <img class="img-fluid" src="{{ url_for('static', filename='images/' + candidate['image']) }}"
+                        alt="{{ candidate['nominee'] }}">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

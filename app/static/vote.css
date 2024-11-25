@@ -1,0 +1,455 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,800");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+}
+
+nav {
+    display: flex;
+    justify-content: center; /* Center navigation items */
+    align-items: center;
+    gap: 20px;
+    background-color: #121212;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    opacity: 0.9;
+    padding: 8px 16px;
+    border-radius: 5px; /* Rounded edges for smoother design */
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #282828; /* Subtle background on hover */
+    opacity: 1;
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+#indicator {
+    position: absolute;
+    bottom: 0;
+    height: 4px;
+    background: linear-gradient(130deg, #00e2ff, #89ff00);
+    border-radius: 5px;
+    transition: 0.3s ease all;
+}
+
+nav a:before,
+nav a:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 0.2s ease transform;
+}
+
+nav a:before {
+    top: 0;
+    left: 10px;
+    width: 6px;
+    height: 6px;
+}
+
+nav a:after {
+    top: 5px;
+    left: 18px;
+    width: 4px;
+    height: 4px;
+}
+
+nav a:nth-child(1):before {
+    background-color: yellow;
+}
+
+nav a:nth-child(1):after {
+    background-color: red;
+}
+
+nav a:nth-child(2):before {
+    background-color: #00e2ff;
+}
+
+nav a:nth-child(2):after {
+    background-color: #89ff00;
+}
+
+nav a:nth-child(3):before {
+    background-color: purple;
+}
+
+nav a:nth-child(3):after {
+    background-color: palevioletred;
+}
+
+#indicator {
+    position: absolute;
+    left: 35%;
+    bottom: 0;
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 5px;
+    transition: 0.2s ease left;
+    background: linear-gradient(130deg, #00e2ff, #89ff00);
+}
+
+nav a:nth-child(2) {
+    opacity: 1;
+}
+
+nav a:nth-child(2):before,
+nav a:nth-child(2):after {
+    transform: scale(1);
+}
+
+nav a:hover {
+    opacity: 1;
+}
+
+nav a:hover:before,
+nav a:hover:after {
+    transform: scale(1);
+}
+
+nav a:nth-child(1):hover~#indicator {
+    left: 5%;
+    background: linear-gradient(130deg, yellow, red);
+}
+
+nav a:nth-child(3):hover~#indicator {
+    left: 70%;
+    background: linear-gradient(130deg, purple, palevioletred);
+}
+
+.vote-container {
+    padding: 33px;
+    padding-left: 45px;
+    padding-right: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.vote-title {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 15% 1fr;
+    justify-items: right;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 1s forwards 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.container {
+    font-family: 'Poppins', sans-serif;
+    width: 90%;
+    margin: auto;
+    padding-top: 20px;
+    opacity: 0;
+    animation: fadeIn 1s forwards 0.8s ease-in;
+}
+
+.voter-name {
+    width: 97%;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    text-align: right;
+}
+
+.title {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    margin-left: 50px;
+}
+
+.position-title {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ececec;
+    text-align: center;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    margin-bottom: 5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    width: 370px;
+    height: 310px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    background-color: #161616;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: "";
+    width: 370px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background: -webkit-linear-gradient(to right, #F58220, #ffbb00);
+    background: linear-gradient(to right, #F58220, #ffbb00);
+    transition: all 0.5s ease;
+}
+
+.card * {
+    z-index: 1;
+}
+
+.can-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 5px solid #161616;
+    margin-top: 30px;
+    transition: all 0.5s ease;
+    object-fit: cover;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s ease;
+}
+
+.card-info span {
+    font-weight: 600;
+    font-size: 22px;
+    color: #ececec;
+    margin-top: 15px;
+}
+
+.card-info p {
+    color: rgba(224, 224, 224, 0.5);
+}
+
+.radio-button {
+    display: block;
+}
+
+.button {
+    text-decoration: none;
+    background-color: #0f0f0f;
+    color: rgb(211, 211, 211);
+    padding: 5px 20px;
+    border-radius: 25px;
+    transition: all 0.5s ease;
+}
+
+.card-container>.card:nth-child(odd) {
+    background-color: #2f2f2f;
+    /* Dark color for odd items */
+}
+
+.card-container>.card:nth-child(even) {
+    background-color: #3d3d3d;
+    /* Lighter color for even items */
+}
+
+.card:hover::before {
+    width: 370px;
+    height: 310px;
+    border-bottom: none;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    transform: scale(0.95);
+}
+
+.card:hover .card-info {
+    transform: translate(0%, -25%);
+}
+
+.card:hover .can-img {
+    transform: scale(2) translate(-60%, -40%);
+}
+
+.button:hover {
+    background-color: #FF6844;
+    transform: scale(1.1);
+}
+
+.submit-button {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #0f0f0f;
+    color: #e4e4e4;
+    padding: 15px;
+    width: 30%;
+    border: none;
+    font-size: 25px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-left: 35%;
+    transition: all 0.5s ease;
+}
+
+.submit-button:hover {
+    color: black;
+    background-color: #FF6844;
+    transform: scale(1.1);
+}
+
+.radio-button {
+    display: none;
+}
+
+.card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.card.disabled {
+    opacity: 0.5;
+}
+
+.card.selected .button {
+    background-color: #FF6844 !important;
+    transform: scale(1.1);
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black background with transparency */
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal-content {
+    background-color: #333;
+    padding: 20px;
+    margin: 10% auto;
+    width: 80%;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+}
+
+#voteSummary {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.confirm-button,
+.close-button {
+    background-color: #0f0f0f;
+    color: #e4e4e4;
+    padding: 15px;
+    width: 40%;
+    margin: 15px 0;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.confirm-button:hover {
+    background-color: #FF6844;
+    transform: scale(1.1);
+}
+
+@media (max-width: 800px) {
+
+    .vote-title {
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+        justify-items: left;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    @media (max-width: 800px) {
+        nav {
+            flex-direction: column; /* Stack items vertically */
+            gap: 10px;
+            padding: 15px;
+        }
+    
+        nav a {
+            font-size: 0.9rem; /* Adjust font size */
+            padding: 10px;
+            text-align: center;
+        }
+    
+        #indicator {
+            display: none; /* Hide indicator on smaller screens */
+        }
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .title {
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .submit-button {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        background-color: #0f0f0f;
+        color: #e4e4e4;
+        padding: 15px;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .voter-name {
+        text-align: center;
+        width: 100%;
+    }
+
+}

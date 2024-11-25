@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{url_for('static', filename='auth.css')}}">
+  <link rel="icon" href="{{url_for('static', filename='favicon.png')}}" type="image/png">
+  <title>Verify Email - WINC Student Council Elections 2024</title>
+</head>
+
+<body>
+  <h2 class="auth-title">Verify Your Email</h2>
+
+  <p class="auth-message" style = "color: white; padding-left: 20px; padding-right: 20px;">A recovery code has been sent to {{ masked_email }}.</p>
+
+  <form class="auth-form" method="post" action="{{ url_for('auth.verify_email') }}">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul>
+        {% for category, message in messages %}
+          <li><div style="color: red; font-size: 15px;">{{ message }}</div></li>
+          <br>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+    <label for="recovery_code">Enter Recovery Code:</label>
+    <br>
+    <input type="text" name="recovery_code" required>
+    <br>
+    <button type="submit">Verify Code</button>
+  </form>
+
+
+  <a href="{{ url_for('auth.resend_pass_code') }}">Resend Code</a>
+
+
+</body>
+
+</html>
