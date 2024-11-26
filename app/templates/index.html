@@ -9,20 +9,19 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
     <link rel="stylesheet" href="static/style.css">
     <link rel="stylesheet" href="static/home.css">
-    <link rel="icon" href="{{url_for('static', filename='favicon.png')}}" type="image/png">
+    <link rel="icon" href="{{url_for('static', filename='logo.png')}}" type="image/png">
 </head>
 
 <body>
 
     <div class="home-container">
         <div class="home-title">
-            <div><img src="{{url_for('static', filename='logo.png')}}" width='250px'></div>
-            <div>
+            <div><img class="logo" src="{{url_for('static', filename='logo.png')}}"></div>
+            <div class="navbar">
                 <nav>
                     <a href="{{url_for('main.index')}}">Home</a>
                     <a href="{{url_for('register.register')}}">Vote</a>
                     <a href="{{url_for('vote.results')}}">Results</a>
-                    <div id="indicator"></div>
                 </nav>
             </div>
         </div>
@@ -40,7 +39,7 @@
             </div>
         </div>
     </div>
-    <div class="progress-container"> 
+    <div class="progress-container">
         <div class="step-card">
             <h3>Step 1: Sign In</h3>
             <p>Press 'Voting' at the top right to get directed to the sign in page. Proceed by signing in if already
@@ -64,18 +63,18 @@
     <script>
         const countdownDateStart = new Date("November 27, 2024 09:00:00").getTime();
         const countdownDateEnd = new Date("November 28, 2024 09:00:00").getTime();
-    
+
         const countdownFunction = setInterval(function () {
             const now = new Date().getTime();
             const distanceToStart = countdownDateStart - now;
             const distanceToEnd = countdownDateEnd - now;
-    
+
             if (distanceToStart > 0) {
                 const days = Math.floor(distanceToStart / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distanceToStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distanceToStart % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distanceToStart % (1000 * 60)) / 1000);
-    
+
                 document.getElementById("countdown").innerHTML = `${days} D, ${hours} : ${minutes} : ${seconds}`;
             }
             else if (distanceToEnd > 0) {
@@ -85,16 +84,16 @@
             else {
                 clearInterval(countdownFunction);
                 document.getElementById("countdown").innerHTML = "Voting has ended.";
-                
+
                 const voteButton = document.getElementById("vote-button");
                 if (voteButton) {
                     voteButton.innerHTML = "Thank you for voting!";
-                    voteButton.disabled = true; 
+                    voteButton.disabled = true;
                 }
             }
         }, 1000);
     </script>
-    
+
 
 </body>
 

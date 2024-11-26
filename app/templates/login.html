@@ -5,56 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}?v={{ timestamp }}">
-    <link rel="icon" href="{{url_for('static', filename='favicon.png')}}" type="image/png">
+    <link rel="icon" href="{{url_for('static', filename='logo.png')}}" type="image/png">
     <title>Login - WINC Student Council Elections 2024</title>
 </head>
 
 <body>
 
     <style>
-    .modal {
-        display: none; 
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.5); /* Dim the background */
-    }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Dim the background */
+        }
 
-    /* Modal Content */
-    .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        border-radius: 8px;
-        width: 75%;
-        max-width: 1000px !important;
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 8px;
+            width: 75%;
+            max-width: 1000px !important;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
-    /* Close Button */
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-    }
+        /* Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
     {% extends "base.html" %}
     {% block content %}
@@ -77,19 +77,22 @@
                 {% endwith %}
                 <input type="text" id="username" name="username" required placeholder="Username" />
                 <input type="email" id="email" name="email" required placeholder="Email" />
-                <input type="password" id="password" name="password" required placeholder="Password (atleast 6 characters)" />
+                <input type="password" id="password" name="password" required
+                    placeholder="Password (atleast 6 characters)" />
                 <br>
                 <div style="margin: 10px 0; display: flex; align-items: center; width: 100%">
-                    
+
                     <label for="accept-terms" style="width: 100%; font-size: 14px; text-align: center;">
                         By registering, you accept the <a href="javascript:void(0)" onclick="openTermsModal()">Terms and
                             Conditions</a>
-                            
+
                     </label>
-                    
+
                 </div>
                 <br>
                 <button type="submit" id="sign-up-button">Sign Up</button>
+                <p><a href="#" onClick="showSignInForm()" id="sign-up-link">Don't have an account?</a>
+                </p>
                 {% if error_message %}
                 <div style="color: red; font-size: 13px;">{{ error_message }}</div>
                 {% endif %}
@@ -104,6 +107,8 @@
                 <input type="password" id="password" name="password" required placeholder="Password" />
                 <a href="{{ url_for('auth.forgot_password') }}">Forgot Password?</a>
                 <button type="submit">Sign In</button>
+                <p><a href="#" onClick="showSignUpForm()" id="sign-in-link">Already have an account?</a>
+                </p>
                 {% if error_message %}
                 <div style="color: red; font-size: 13px;">{{ error_message }}</div>
                 {% endif %}
@@ -129,9 +134,7 @@
     <!-- Terms and Conditions Modal -->
     <div id="terms-modal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeTermsModal()">&times;</span><span class="close" onclick="closeTermsModal()" aria-label="Close modal">&times;</span>
-
-            <h2>Terms and Conditions</h2>
+            <span class="close" onclick="closeTermsModal()">&times;</span>
             <p>
                 <strong>Eligibility</strong><br>
                 • Only enrolled students of the WINC are eligible to vote.<br>
@@ -154,7 +157,8 @@
                 <strong>Technical Issues</strong><br>
                 • The University is not responsible for technical difficulties arising from the voter’s device or
                 internet connection.<br>
-                • In case of issues with the voting platform, students should contact the designated support team at <strong>elections@boltonac.ae</strong>
+                • In case of issues with the voting platform, students should contact the designated support team at
+                <strong>elections@boltonac.ae</strong>
                 immediately.<br><br>
 
                 <strong>Prohibited Activities</strong><br>
@@ -205,6 +209,40 @@
                 termsModal.style.display = 'none';
             }
         };
+
+        // Event listener for "Already have an account?" link
+        document.getElementById("sign-in-link").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            console.log("Sign-in link clicked");
+            if (isMobile()) {
+                showSignInForm();
+            }
+        });
+
+        // Show the Sign Up form and hide the Sign In form
+        function showSignUpForm() {
+            console.log("Switching to Sign-Up form");
+            document.querySelector(".sign-in-container").style.display = "none";
+            document.querySelector(".sign-up-container").style.display = "block";
+            document.querySelector(".sign-up-container").style.opacity = 1;
+        }
+
+        // Show the Sign In form and hide the Sign Up form
+        function showSignInForm() {
+            console.log("Switching to Sign-In form");
+            document.querySelector(".sign-up-container").style.display = "none";
+            document.querySelector(".sign-up-container").style.opacity = 0;
+            document.querySelector(".sign-in-container").style.display = "block";
+        }
+
+        // Reset forms visibility when resizing the window
+        window.addEventListener("resize", function () {
+            console.log("Window resized");
+            if (!isMobile()) {
+                document.querySelector(".sign-in-container").style.display = "block";
+                document.querySelector(".sign-up-container").style.display = "block";
+            }
+        });
     </script>
     {% endblock %}
 </body>

@@ -13,7 +13,8 @@ body {
 
 nav {
     display: flex;
-    justify-content: center; /* Center navigation items */
+    justify-content: center;
+    /* Center navigation items */
     align-items: center;
     gap: 20px;
     background-color: #121212;
@@ -21,7 +22,8 @@ nav {
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    /* Subtle shadow for depth */
 }
 
 nav a {
@@ -32,14 +34,17 @@ nav a {
     font-size: 1rem;
     opacity: 0.9;
     padding: 8px 16px;
-    border-radius: 5px; /* Rounded edges for smoother design */
+    border-radius: 5px;
+    /* Rounded edges for smoother design */
     transition: all 0.3s ease;
 }
 
 nav a:hover {
-    background-color: #282828; /* Subtle background on hover */
+    background-color: #282828;
+    /* Subtle background on hover */
     opacity: 1;
-    transform: translateY(-2px); /* Slight lift effect */
+    transform: translateY(-2px);
+    /* Slight lift effect */
 }
 
 #indicator {
@@ -143,14 +148,14 @@ nav a:nth-child(3):hover~#indicator {
     padding-left: 45px;
     padding-right: 40px;
     display: flex;
-    justify-content: center;
+    justify-items: center;
+    align-items: center;
 }
 
 .vote-title {
     width: 100%;
-    display: grid;
-    grid-template-columns: 15% 1fr;
-    justify-items: right;
+    display: flex;
+    justify-content: center;
     align-items: center;
     opacity: 0;
     animation: fadeIn 1s forwards 0.5s ease-in;
@@ -185,7 +190,7 @@ nav a:nth-child(3):hover~#indicator {
 .title {
     font-family: 'Poppins', sans-serif;
     color: white;
-    margin-left: 50px;
+    margin-bottom: 4rem;
 }
 
 .position-title {
@@ -238,8 +243,8 @@ nav a:nth-child(3):hover~#indicator {
 }
 
 .can-img {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     border: 5px solid #161616;
     margin-top: 30px;
@@ -278,15 +283,6 @@ nav a:nth-child(3):hover~#indicator {
     transition: all 0.5s ease;
 }
 
-.card-container>.card:nth-child(odd) {
-    background-color: #2f2f2f;
-    /* Dark color for odd items */
-}
-
-.card-container>.card:nth-child(even) {
-    background-color: #3d3d3d;
-    /* Lighter color for even items */
-}
 
 .card:hover::before {
     width: 370px;
@@ -380,11 +376,11 @@ nav a:nth-child(3):hover~#indicator {
     font-size: 18px;
 }
 
-.confirm-button,
-.close-button {
+.confirm-button {
     background-color: #0f0f0f;
     color: #e4e4e4;
     padding: 15px;
+    text-align: center;
     width: 40%;
     margin: 15px 0;
     border: none;
@@ -401,55 +397,93 @@ nav a:nth-child(3):hover~#indicator {
 }
 
 @media (max-width: 800px) {
-
-    .vote-title {
-        width: 100%;
-        grid-template-columns: 1fr 1fr;
-        justify-items: left;
-        align-items: center;
-        gap: 2rem;
+    .card-container {
+        gap: 1.5rem;
+        /* Reduce the gap between cards */
     }
 
-    @media (max-width: 800px) {
-        nav {
-            flex-direction: column; /* Stack items vertically */
-            gap: 10px;
-            padding: 15px;
-        }
-    
-        nav a {
-            font-size: 0.9rem; /* Adjust font size */
-            padding: 10px;
-            text-align: center;
-        }
-    
-        #indicator {
-            display: none; /* Hide indicator on smaller screens */
-        }
+    .card {
+        width: 250px;
+        /* Make the card narrower */
+        height: 230px;
+        /* Adjust the height */
     }
 
-    .container {
+    .card::before {
+        width: 250px;
+        /* Match the card's new width */
+        height: 80px;
+        /* Adjust the height of the gradient bar */
+    }
+
+    .can-img {
+        width: 80px;
+        /* Reduce image size */
+        height: 80px;
+        border-width: 5px;
+        /* Adjust border thickness */
+        margin-top: 0;
+        /* Adjust spacing */
+    }
+
+    .card-info {
+        gap: 5px;
+        /* Reduce spacing between elements inside the card */
+    }
+
+    .card-info span {
+        font-size: 14px;
+        /* Smaller font for the candidate name */
+    }
+
+    .card-info p {
+        font-size: 12px;
+        /* Smaller font for additional info */
+    }
+
+    .button {
+        padding: 5px 15px;
+        /* Reduce button padding */
+        font-size: 12px;
+        /* Smaller button text */
+    }
+
+    #voteSummary {
+        font-size: 14px;
+    }
+
+    .confirm-button {
+        width: 80px;
+        height: 80px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 50%;
+        transition: all 0.5s ease;
         text-align: center;
     }
 
-    .title {
-        text-align: center;
-        margin-left: 0;
-    }
+}
 
-    .submit-button {
-        margin-top: 20px;
-        margin-bottom: 10px;
-        background-color: #0f0f0f;
-        color: #e4e4e4;
-        padding: 15px;
-        width: 100%;
-        margin-left: 0;
-    }
+.container {
+    text-align: center;
+}
 
-    .voter-name {
-        text-align: center;
-        width: 100%;
-    }
+.title {
+    text-align: center;
+    margin-left: 0;
+}
 
+.submit-button {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #0f0f0f;
+    color: #e4e4e4;
+    padding: 15px;
+    width: 100%;
+    margin-left: 0;
+}
+
+.voter-name {
+    text-align: center;
+    width: 100%;
 }

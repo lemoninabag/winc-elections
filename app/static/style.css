@@ -5,6 +5,13 @@ html::-webkit-scrollbar {
     display: none;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -22,42 +29,22 @@ html::-webkit-scrollbar {
 
 
 .home-container {
-    height: 100vh;
     display: grid;
     grid-template-rows: 15% 85%;
     align-items: center;
     justify-items: center;
-    padding: 20px
+    padding: 20px;
+    width: 100%;
 }
 
 .home-title {
     width: 95%;
     display: grid;
-    grid-template-columns: 15% 1fr;
+    grid-template-columns: 6% 92%;
     justify-items: right;
     align-items: center;
     opacity: 0;
     animation: fadeIn 1s forwards 0.5s ease-in;
-}
-
-nav {
-    display: flex;
-    gap: 15px;
-}
-
-nav a {
-    position: relative;
-    color: #ffffff;
-    text-decoration: none;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    opacity: 0.7;
-    transition: 0.2s ease color;
-    padding: 10px 15px;
-}
-
-nav a:hover {
-    opacity: 1;
 }
 
 
@@ -144,12 +131,24 @@ footer {
 
 @media (max-width: 800px) {
 
+    /* Center the entire content of home-container */
+    .home-container {
+        padding: 10px;
+        justify-content: center;
+    }
+
+
+
+    /* Adjusting the home-title for stacking */
     .home-title {
-        width: 100%;
-        grid-template-columns: 1fr 1fr;
-        justify-items: center;
-        align-items: center;
-        gap: 2rem;
+        display: flex;
+        /* Center vertically */
+        align-items: last baseline;
+        gap: 15rem;
+        width: 95%;
+        height: 12rem;
+        padding: 10px;
+        /* Add space between logo and navbar */
     }
 
     /* Hide the vector image on mobile */
@@ -169,6 +168,7 @@ footer {
 
     .home-content-text {
         text-align: center;
+        font-size: 4rem;
     }
 
     .home-content-main {
