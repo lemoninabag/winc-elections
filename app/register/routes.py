@@ -62,9 +62,9 @@ def register():
                 with open('student_data.csv', mode='r') as file:
                     csv_reader = csv.DictReader(file)
                     for row in csv_reader:
-                        if row['username'] == username:
+                        if row['username'].strip() == username:
                             student_name = row['name']
-                            student_email = row['email']  
+                            student_email = row['email'].strip()
                             break
 
                 if not student_name:
