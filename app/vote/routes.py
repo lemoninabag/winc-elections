@@ -5,11 +5,12 @@ from flask import Blueprint, render_template, request, session, redirect, url_fo
 
 vote_bp = Blueprint('vote', __name__)
 
-VOTING_DEADLINE = datetime(2024, 11, 28, 9, 0)
+VOTING_START = datetime(2024, 11, 28, 10, 29)
+VOTING_END = datetime(2024, 11, 29, 15, 00)
 
 positions = ['President', 'Vice President', 'Secretary', 'Treasurer', 'Events & Cultural Activities Coordinator', 
             'Media Coordinator', 'Sports Coordinator', 'Career Service Coordinator', 'UoB Representative', 'Pearson Representative', 
-             'ATHE Representative', 'Northwood Representative']
+            'ATHE Representative', 'Northwood Representative']
 
 @vote_bp.route('/', methods = ['GET', 'POST'])
 def vote():
@@ -19,7 +20,12 @@ def vote():
         return redirect(url_for('auth.login'))
 
     current_time = datetime.now()
-    if current_time > VOTING_DEADLINE:
+
+    if current_time < VOTING_START:
+        flash("Voting has not yet started.")
+        return redirect(url_for('main.index'))
+
+    if current_time > VOTING_END:
         flash("Voting has ended. Thank you for participating.")
         return redirect(url_for('main.index'))
 
@@ -69,7 +75,7 @@ def vote():
         return "You have already voted. Thank you!"
     
     return render_template('vote.html', positions=positions, candidates=candidates, 
-                           student_name=student_name, selected_candidates=selected_candidates, message=message)
+                        student_name=student_name, selected_candidates=selected_candidates, message=message)
 
 
 @vote_bp.route('/confirmation', methods = ['GET', 'POST'])
