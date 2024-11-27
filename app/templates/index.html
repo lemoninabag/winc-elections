@@ -75,7 +75,7 @@
                 const minutes = Math.floor((distanceToStart % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distanceToStart % (1000 * 60)) / 1000);
 
-                document.getElementById("countdown").innerHTML = `${days} D, ${hours} : ${minutes} : ${seconds}`;
+                document.getElementById("countdown").innerHTML = `${hours} : ${minutes} : ${seconds}`;
             }
             else if (distanceToEnd > 0) {
                 clearInterval(countdownFunction);
