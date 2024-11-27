@@ -76,7 +76,7 @@ def register():
                     if not error_message:
                         session['student_name'] = student_name
 
-                        hashed_pass = bcrypt.hashpw(password, bcrypt.gensalt())
+                        hashed_pass = bcrypt.hashpw(password, bcrypt.gensalt()).decode('utf-8')
 
                         confirmation_code = random.randint(1000, 9999)
                         session['confirmation_code'] = confirmation_code
