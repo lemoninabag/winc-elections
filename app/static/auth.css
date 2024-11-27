@@ -364,7 +364,7 @@ footer a {
 }
 
 .auth-title {
-    color: white;
+    color: white !important;
 
 }
 
