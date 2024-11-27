@@ -63,11 +63,12 @@ def login():
                     return render_template('login.html', error_message=error_message)
 
                 return redirect(url_for('vote.vote'))
+            else:
+                error_message = "Your credentials are incorrect."
         else:
-            error_message = "Invalid username or password."
+            error_message = "Invalid username."
 
     return render_template('login.html', error_message=error_message)
-
 
 
 @auth_bp.route('/forgot_password', methods = ['GET', 'POST'])
