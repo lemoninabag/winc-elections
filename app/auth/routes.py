@@ -18,8 +18,8 @@ def login():
     logout()
     error_message = None  
     if request.method == 'POST':
-        print(request.form)
         username = request.form['username']
+        print(username)
         password = request.form['password'].encode('utf-8')
 
         with open('voters.csv', mode='r') as file:
