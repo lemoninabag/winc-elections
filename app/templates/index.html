@@ -61,8 +61,8 @@
     </footer> -->
 
     <script>
-        const countdownDateStart = new Date("November 28, 2024 10:30:00").getTime();
-        const countdownDateEnd = new Date("November 29, 2024 15:00:00").getTime();
+        const countdownDateStart = new Date("November 29, 2024 10:30:00").getTime();
+        const countdownDateEnd = new Date("November 30, 2024 15:00:00").getTime();
 
         const countdownFunction = setInterval(function () {
             const now = new Date().getTime();
@@ -70,7 +70,6 @@
             const distanceToEnd = countdownDateEnd - now;
 
             if (distanceToStart > 0) {
-                const days = Math.floor(distanceToStart / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distanceToStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distanceToStart % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distanceToStart % (1000 * 60)) / 1000);
