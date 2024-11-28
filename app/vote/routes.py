@@ -6,7 +6,7 @@ from flask import Blueprint, render_template, request, session, redirect, url_fo
 vote_bp = Blueprint('vote', __name__)
 
 # VOTING_START = datetime(2024, 11, 28, 10, 29)
-VOTING_END = datetime(2024, 11, 29, 15, 00)
+VOTING_END = datetime(2024, 11, 29, 14, 00)
 
 positions = ['President', 'Vice President', 'Secretary', 'Treasurer', 'Events & Cultural Activities Coordinator', 
             'Media Coordinator', 'Sports Coordinator', 'Career Service Coordinator', 'UoB Representative', 'Pearson Representative', 
