@@ -12,7 +12,7 @@
     {% extends "base.html" %}
     {% block content %}
 
-    <h2 class="auth-title">Authenticate Your Account</h2>
+    <h2 class="auth-title" style = "color: white !important;">Authenticate Your Account</h2>
 
     <p class="auth-message" style = "color: white; padding-left: 20px; padding-right: 20px;">An authentication code has been sent to your email. Please check your spam folder if you don't see it.</p>
     <form class="auth-form" method="POST" action="{{ url_for('auth.authenticate') }}">
