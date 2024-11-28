@@ -38,7 +38,6 @@ def vote():
 
     with open('nominees.csv', 'r', encoding='utf-8-sig') as file:
         reader = csv.DictReader(file)
-        print(reader.fieldnames)
         for row in reader:
             if row['position'] in candidates:
                 candidates[row['position']].append(row)
@@ -132,10 +131,9 @@ def update_nominee_votes(votes):
         reader = csv.DictReader(file)
         for row in reader:
             nominee_name = row['nominee']
-            print(f"Updating vote for {nominee_name}: {votes.values()}")
+            print(row['nominee'], row['votes'])
             if nominee_name in votes.values():
                 row['votes'] = str(int(row.get('votes', 0)) + 1)
-                print(row['votes'])
             nominees.append(row)
 
     with open('nominees.csv', 'w', newline = '', encoding='utf-8-sig') as file:
