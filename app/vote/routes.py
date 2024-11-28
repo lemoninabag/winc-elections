@@ -5,7 +5,7 @@ from flask import Blueprint, render_template, request, session, redirect, url_fo
 
 vote_bp = Blueprint('vote', __name__)
 
-VOTING_START = datetime(2024, 11, 28, 10, 29)
+# VOTING_START = datetime(2024, 11, 28, 10, 29)
 VOTING_END = datetime(2024, 11, 29, 15, 00)
 
 positions = ['President', 'Vice President', 'Secretary', 'Treasurer', 'Events & Cultural Activities Coordinator', 
@@ -21,9 +21,9 @@ def vote():
 
     current_time = datetime.now()
 
-    if current_time < VOTING_START:
-        flash("Voting has not yet started.")
-        return redirect(url_for('main.index'))
+    # if current_time < VOTING_START:
+    #     flash("Voting has not yet started.")
+    #     return redirect(url_for('main.index'))
 
     if current_time > VOTING_END:
         flash("Voting has ended. Thank you for participating.")
