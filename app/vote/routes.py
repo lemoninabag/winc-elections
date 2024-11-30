@@ -1,12 +1,15 @@
 import csv
 from datetime import datetime
+from pytz import datetime
 from app.session_manager import active_sessions
 from flask import Blueprint, render_template, request, session, redirect, url_for, flash
 
 vote_bp = Blueprint('vote', __name__)
 
+uae_tz = timezone('Asia/Dubai')
+
 # VOTING_START = datetime(2024, 11, 28, 10, 29)
-VOTING_END = datetime(2024, 11, 29, 14, 00)
+VOTING_END = uae_tz.localize(datetime(2024, 11, 29, 14, 0))
 
 positions = ['President', 'Vice President', 'Secretary', 'Treasurer', 'Events & Cultural Activities Coordinator', 
             'Media Coordinator', 'Sports Coordinator', 'Career Service Coordinator', 'UoB Representative', 'Pearson Representative', 
@@ -19,7 +22,7 @@ def vote():
     if 'user' not in session or session.get('session_id') != active_sessions.get(session['user']):
         return redirect(url_for('auth.login'))
 
-    current_time = datetime.now()
+    current_time = datetime.now(uae_tz)
 
     # if current_time < VOTING_START:
     #     flash("Voting has not yet started.")
