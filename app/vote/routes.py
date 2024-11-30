@@ -9,7 +9,7 @@ vote_bp = Blueprint('vote', __name__)
 uae_tz = timezone('Asia/Dubai')
 
 # VOTING_START = datetime(2024, 11, 28, 10, 29)
-VOTING_END = uae_tz.localize(datetime(2024, 11, 29, 14, 0))
+VOTING_END = uae_tz.localize(datetime(2024, 11, 30, 14, 0))
 
 positions = ['President', 'Vice President', 'Secretary', 'Treasurer', 'Events & Cultural Activities Coordinator', 
             'Media Coordinator', 'Sports Coordinator', 'Career Service Coordinator', 'UoB Representative', 'Pearson Representative', 
